@@ -56,9 +56,10 @@ class DFA(object):
         return False
 
 if __name__ == '__main__':
+    
     alphabets = set(['0','1'])
     states = set(['a','b'])
-    startState = 'a'
+    startState = set('a')
     endState = set(list('b'))
     transitionRule = {
         ('a','0') : 'b',
