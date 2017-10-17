@@ -6,7 +6,7 @@ class DFATestCase(unittest.TestCase):
     def setUp(self):
         self.alphabets = set(['0','1'])
         self.states = set(['a','b'])
-        self.startState = 'a'
+        self.initialState = 'a'
         self.endState = set(list('b'))
         self.transitionRule = {
             ('a','0') : 'b',
@@ -19,8 +19,8 @@ class DFATestCase(unittest.TestCase):
             ('a', '1') : 'a',
             ('b','0') : 'b',
         }
-        self.dfaTrue =  dfa.DFA(self.alphabets,self.states,self.startState,self.endState,self.transitionRule)
-        self.dfaFalse = dfa.DFA(self.alphabets,self.states,self.startState,self.endState, self.transitionRuleIncomplete)
+        self.dfaTrue =  dfa.DFA(self.alphabets,self.states,self.initialState,self.endState,self.transitionRule)
+        self.dfaFalse = dfa.DFA(self.alphabets,self.states,self.initialState,self.endState, self.transitionRuleIncomplete)
 
     def testIsDFA(self):
         self.assertTrue(self.dfaTrue.checkDFA())
@@ -36,7 +36,7 @@ class DFATestCase(unittest.TestCase):
 
     def testSetInitailState(self):
         self.dfaTrue.setInitalState()
-        self.assertTrue(self.dfaTrue.currentState == self.startState)
+        self.assertTrue(self.dfaTrue.currentState == self.initialState)
         self.dfaTrue.resetState()
     
     def testIsFinalState(self):

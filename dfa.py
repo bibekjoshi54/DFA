@@ -2,10 +2,10 @@ import exceptionCollection
 
 class DFA(object):
     
-    def __init__(self,alphabets, states, startState, finalStates, transitionRule):
+    def __init__(self,alphabets, states, initialState, finalStates, transitionRule):
         self.alphabets = alphabets
         self.states = states
-        self.startState = startState
+        self.initialState = initialState
         self.finalStates = finalStates
         self.transitionRule = transitionRule
         self.currentState = None
@@ -20,7 +20,7 @@ class DFA(object):
         return True
 
     def setInitalState(self):
-        self.currentState = self.startState
+        self.currentState = self.initialState
 
     def resetState(self):
         self.currentState = None
@@ -45,13 +45,12 @@ class DFA(object):
         if inputString:
             if not self.checkDFA():
                 raise exceptionCollection.NDFAError(self.transitionRule)
-            
-            if not self.checkString():
+             if not self.checkString():
                 raise exceptionCollection.StringError(self.inputString)
             self.setInitalState()
             self.processAlphabet()
             return self.checkFinalState()
-        elif set(self.startState) & set(self.finalStates):
+        elif set(self.initialState) & set(self.finalStates):
             return True
         return False
 
@@ -59,7 +58,7 @@ if __name__ == '__main__':
     
     alphabets = set(['0','1'])
     states = set(['a','b'])
-    startState = set('a')
+    initialState = set('a')
     endState = set(list('b'))
     transitionRule = {
         ('a','0') : 'b',
@@ -67,5 +66,5 @@ if __name__ == '__main__':
         ('b','0') : 'b',
         ('b','1'): 'a'
     }
-    dfa = DFA(alphabets,states,startState,endState,transitionRule)
+    dfa = DFA(alphabets,states,initialState,endState,transitionRule)
     print(dfa.start(input('> ')))
