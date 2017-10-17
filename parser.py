@@ -11,8 +11,16 @@ class Parser(object):
         self.transitionRule = dict() 
         self.dfaRawValues = None     
         self.dfaValues = None
+        self.checkFileExists()
                          
-        
+    def checkFileExists(self):
+        try:
+            ab = open(self.fileName,'r')
+            ab.close()
+            return 1
+        except:
+            exit('DFA %s doesnot exist' %self.fileName)
+
 
     def open(self):
         dfaValues = open(self.fileName,'r')
@@ -23,6 +31,8 @@ class Parser(object):
     def format(self):
         self.open()
         self.dfaValues = self.dfaRawValues.split('\n')
+        if len(self.dfaValues) < 5:
+            exit('Syntax Error')
         self.alphabets = set(self.dfaValues[0].split(' '))
         self.states = set(self.dfaValues[1].split(' '))
         self.initialState = self.dfaValues[2]
