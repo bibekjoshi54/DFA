@@ -9,6 +9,8 @@ class DFA(object):
         self.finalStates = finalStates
         self.transitionRule = transitionRule
         self.currentState = None
+        if not self.checkDFA():
+            raise exceptionCollection.NDFAError(self.transitionRule)
 
     def checkDFA(self):
         try:
@@ -43,9 +45,7 @@ class DFA(object):
     def start(self, inputString):
         self.inputString = inputString
         if inputString:
-            if not self.checkDFA():
-                raise exceptionCollection.NDFAError(self.transitionRule)
-             if not self.checkString():
+            if not self.checkString():
                 raise exceptionCollection.StringError(self.inputString)
             self.setInitalState()
             self.processAlphabet()
