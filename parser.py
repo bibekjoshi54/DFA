@@ -11,7 +11,7 @@ class Parser(object):
         self.transitionRule = dict() 
         self.dfaRawValues = None     
         self.dfaValues = None
-        self.open()                  
+                         
         
 
     def open(self):
@@ -21,6 +21,7 @@ class Parser(object):
         return self.dfaRawValues
 
     def format(self):
+        self.open()
         self.dfaValues = self.dfaRawValues.split('\n')
         self.alphabets = set(self.dfaValues[0].split(' '))
         self.states = set(self.dfaValues[1].split(' '))
